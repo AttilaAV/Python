@@ -14,7 +14,10 @@ while True:
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 3)
         roi_gray = gray[y:y+w, x:x+w]
         roi_color = frame[y:y+h, x:x+w]
-
+        cv2.putText(frame, 'FACE', (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (138,62,215), 2, cv2.LINE_4)
+        eyes = eye_cascade.detectMultiScale(roi_gray)
+        for (ex,ey,ew,eh) in eyes:
+            cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
     cv2.imshow('frame', frame)
 
     if cv2.waitKey(1) == ord('q'):
